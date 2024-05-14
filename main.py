@@ -167,6 +167,7 @@ async def checklink_scan(channel, link, message):
                 await message.delete()
                 delete_text = f"🚨 Deleted message from **{message.author}** due to malicious detection. @here" 
                 await channel.send(delete_text)
+                print(f"[DELETE] URL={link}, SENT_BY_USER={message.author}, REASON=MALICIOUS")
 
             if warnings:
                 embed.add_field(name="🚨 VirusTotal Warnings (Top 10)", value=warnings_text, inline=False)
