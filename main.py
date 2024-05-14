@@ -38,6 +38,14 @@ def update_seen_links(url):
         json.dump(seen_links, file, indent=4)
 
 
+# Function to delete messages with detected malicious links
+async def delete_malicious_message(channel, message, link):
+    delete_text = f"🚨 Deleted message from **{message.author}** due to malicious detection. @here" 
+    await message.delete()
+    await channel.send(delete_text)
+    print(f"[DELETE] URL={link}, SENT_BY_USER={message.author}, REASON=MALICIOUS")
+
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -163,11 +171,7 @@ async def checklink_scan(channel, link, message):
 
             if malicious_count > 0:
                 embed.add_field(name="⚠️ Malicious Detections (VirusTotal)", value=str(malicious_count), inline=False)
-                # Delete original message and notify scan channel
-                await message.delete()
-                delete_text = f"🚨 Deleted message from **{message.author}** due to malicious detection. @here" 
-                await channel.send(delete_text)
-                print(f"[DELETE] URL={link}, SENT_BY_USER={message.author}, REASON=MALICIOUS")
+                await delete_malicious_message(channel, message, link)
 
             if warnings:
                 embed.add_field(name="🚨 VirusTotal Warnings (Top 10)", value=warnings_text, inline=False)
