@@ -1,5 +1,9 @@
 <div align="center">
 
+# FORK NOTE
+
+This fork is for a specific use case, adding automated response when a malicious link is detected. If you're not looking for this capability, use the official repo at [ThatSINEWAVE/LinkWarden-Bot](https://github.com/ThatSINEWAVE/LinkWarden-Bot)
+
 # LinkWarden - Discord Link Scanner Bot
 
 This Discord bot, designed for personal and community use, enhances server security by scrutinizing links shared within Discord channels. It leverages the VirusTotal API, WHOIS lookups, and urlscan.io scans to provide comprehensive real-time analysis, helping maintain a safe online environment for members.
